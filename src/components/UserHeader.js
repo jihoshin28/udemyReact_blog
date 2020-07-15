@@ -7,18 +7,22 @@ class UserHeader extends React.Component {
         this.props.fetchUser(this.props.id)
     } 
     render(){
-        console.log(this.props.user)
+        let {user} = this.props
+
+        if(!user){
+            return null;
+        }
         return(
-            <div className ='description'>
-                {this.props.user[0].name}
+            <div className ='header'>
+                {user.name}
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return{
-        user: state.user
+        user: state.users.find(user =>  user.id === ownProps.id)
     }
 }
 
